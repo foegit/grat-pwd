@@ -1,5 +1,5 @@
-const App = require('@/App');
-const Config = require('@/util/Config');
+const App = require('./src/App');
+const Config = require('./src/util/Config');
 
 Config.loadEnv();
 
