@@ -15,8 +15,6 @@ class App {
 
         this.bot = new Telegraf(this.config.token);
 
-        console.log('App', this.config);
-
         if (this.config.mode === 'webhook') {
             this.initWebhook();
         }
