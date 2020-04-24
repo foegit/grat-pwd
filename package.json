@@ -4,6 +4,7 @@
     "description": "Telegram bot for store passwrods",
     "main": "index.js",
     "scripts": {
+        "start": "node index.js",
         "postinstall": "link-module-alias",
         "dev": "nodemon index.js",
         "test": "mocha --reporter spec"
