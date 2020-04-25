@@ -1,6 +1,10 @@
 const Telegraf = require('telegraf');
 const express = require('express');
 
+const ActionEventMgr = require('./Mangers/ActionEventMgr');
+const ActionHandler = require('./Handlers/ActionHandler');
+const Database = require('./database/Database');
+
 const defaultConfig = {
     token: null,
     useWebhook: false,
@@ -20,12 +24,16 @@ class App {
         }
 
         this.initBotHandlers();
+
+        this.db = Database.connect();
+        this.actionHandler = new ActionHandler();
     }
 
     initBotHandlers () {
-        this.bot.on('text', (ctx) => {
-            ctx.reply('👍');
-        });
+        this.bot.command('/start', ActionEventMgr.createTgListener('cmd:start'));
+
+        this.bot.on('text', ActionEventMgr.createTgListener('text'));
+        this.bot.on('sticker', ActionEventMgr.createTgListener('sticker'));
     }
 
     initWebhook() {
